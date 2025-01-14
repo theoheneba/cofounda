@@ -1,49 +1,56 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import Link from 'next/link'
-
-type FundingOpportunity = {
-  id: string
-  name: string
-  type: 'ACCELERATOR' | 'INCUBATOR' | 'ANGEL_INVESTOR' | 'VC_FUND'
-  description: string
-  applicationDeadline: string
-}
+import { ExternalLink } from 'lucide-react'
 
 export function FundingOpportunities() {
-  const [opportunities, setOpportunities] = useState<FundingOpportunity[]>([])
-
-  useEffect(() => {
-    fetchOpportunities()
-  }, [])
-
-  const fetchOpportunities = async () => {
-    const res = await fetch('/api/funding-opportunities')
-    if (res.ok) {
-      const data = await res.json()
-      setOpportunities(data)
-    }
-  }
+  const opportunities = [
+    {
+      id: 1,
+      name: 'Seed Round Investment',
+      amount: '$50,000 - $200,000',
+      deadline: '2024-02-15',
+      status: 'Open',
+    },
+    {
+      id: 2,
+      name: 'Tech Startup Grant',
+      amount: '$25,000',
+      deadline: '2024-02-28',
+      status: 'Open',
+    },
+  ]
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Funding Opportunities</h2>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {opportunities.map((opportunity) => (
-          <li key={opportunity.id} className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-lg font-semibold">{opportunity.name}</h3>
-            <p className="text-sm text-gray-600">Type: {opportunity.type.replace('_', ' ')}</p>
-            <p className="mt-2">{opportunity.description}</p>
-            <p className="text-sm text-gray-600 mt-2">Application Deadline: {new Date(opportunity.applicationDeadline).toLocaleDateString()}</p>
-            <Button asChild className="mt-4">
-              <Link href={`/funding/${opportunity.id}`}>Learn More</Link>
-            </Button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Funding Opportunities</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {opportunities.map((opportunity) => (
+            <div
+              key={opportunity.id}
+              className="p-4 rounded-lg border bg-card"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="font-medium">{opportunity.name}</h3>
+                <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                  {opportunity.status}
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground mb-1">Amount: {opportunity.amount}</p>
+              <p className="text-sm text-muted-foreground mb-3">Deadline: {opportunity.deadline}</p>
+              <Button className="w-full" variant="outline">
+                Apply Now
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

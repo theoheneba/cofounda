@@ -1,67 +1,65 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { Button } from "@/components/ui/button"
-import Link from 'next/link'
-
-type Resource = {
-  id: string
-  title: string
-  description: string
-  type: 'ARTICLE' | 'VIDEO' | 'TOOL'
-  url: string
-}
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Book, FileText, Video } from 'lucide-react'
 
 export function ResourceLibrary() {
-  const [resources, setResources] = useState<Resource[]>([])
-  const [filter, setFilter] = useState<'ALL' | 'ARTICLE' | 'VIDEO' | 'TOOL'>('ALL')
+  const resources = [
+    {
+      id: 1,
+      title: 'Startup Financial Planning Guide',
+      type: 'document',
+      category: 'Finance',
+    },
+    {
+      id: 2,
+      title: 'Product Development Best Practices',
+      type: 'video',
+      category: 'Development',
+    },
+    {
+      id: 3,
+      title: 'Marketing Strategy Handbook',
+      type: 'book',
+      category: 'Marketing',
+    },
+  ]
 
-  useEffect(() => {
-    fetchResources()
-  }, [])
-
-  const fetchResources = async () => {
-    const res = await fetch('/api/resources')
-    if (res.ok) {
-      const data = await res.json()
-      setResources(data)
+  const getIcon = (type: string) => {
+    switch (type) {
+      case 'document':
+        return <FileText className="h-4 w-4" />
+      case 'video':
+        return <Video className="h-4 w-4" />
+      case 'book':
+        return <Book className="h-4 w-4" />
+      default:
+        return <FileText className="h-4 w-4" />
     }
   }
 
-  const filteredResources = filter === 'ALL' 
-    ? resources 
-    : resources.filter(resource => resource.type === filter)
-
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Resource Library</h2>
-      <div className="mb-4">
-        <Button onClick={() => setFilter('ALL')} variant={filter === 'ALL' ? 'default' : 'outline'} className="mr-2">
-          All
-        </Button>
-        <Button onClick={() => setFilter('ARTICLE')} variant={filter === 'ARTICLE' ? 'default' : 'outline'} className="mr-2">
-          Articles
-        </Button>
-        <Button onClick={() => setFilter('VIDEO')} variant={filter === 'VIDEO' ? 'default' : 'outline'} className="mr-2">
-          Videos
-        </Button>
-        <Button onClick={() => setFilter('TOOL')} variant={filter === 'TOOL' ? 'default' : 'outline'}>
-          Tools
-        </Button>
-      </div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredResources.map((resource) => (
-          <li key={resource.id} className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-lg font-semibold">{resource.title}</h3>
-            <p className="mt-2">{resource.description}</p>
-            <p className="text-sm text-gray-600 mt-2">Type: {resource.type}</p>
-            <Button asChild className="mt-4">
-              <Link href={resource.url} target="_blank" rel="noopener noreferrer">View Resource</Link>
-            </Button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Resource Library</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-2">
+          {resources.map((resource) => (
+            <div
+              key={resource.id}
+              className="flex items-center p-2 rounded-md hover:bg-accent cursor-pointer"
+            >
+              {getIcon(resource.type)}
+              <div className="ml-3">
+                <p className="text-sm font-medium">{resource.title}</p>
+                <p className="text-xs text-muted-foreground">{resource.category}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 
