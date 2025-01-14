@@ -6,8 +6,8 @@ import { MainNav } from "@/components/main-nav"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "CoFounderHub",
-  description: "Find your perfect cofounder match",
+  title: "Co-Founder Hub - Find Your Perfect Co-Founder",
+  description: "Connect with passionate entrepreneurs and professionals who share your vision and complement your skills.",
 }
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <MainNav />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   )
