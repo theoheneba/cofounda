@@ -4,14 +4,16 @@ import { DashboardStats } from "@/components/dashboard/DashboardStats"
 import { PendingConnections } from "@/components/dashboard/PendingConnections"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { UserStats } from "@/components/dashboard/UserStats"
 
 export default function DashboardPage() {
   return (
     <div className="container mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold">Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <DashboardStats />
+        <UserStats followers={1234} following={567} />
       </div>
 
       <Tabs defaultValue="pitches">
