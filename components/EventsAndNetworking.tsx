@@ -8,7 +8,7 @@ export function EventsAndNetworking() {
   const events = [
     {
       id: 1,
-      name: 'Startup Networking Mixer',
+      name: 'Cofounder Networking Mixer',
       date: '2024-01-25',
       time: '18:00',
       location: 'Tech Hub, Accra',
@@ -16,7 +16,7 @@ export function EventsAndNetworking() {
     },
     {
       id: 2,
-      name: 'Pitch Practice Session',
+      name: 'Startup Pitch Practice',
       date: '2024-01-30',
       time: '14:00',
       location: 'Virtual',

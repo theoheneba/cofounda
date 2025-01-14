@@ -1,7 +1,6 @@
-"use client"
+import { redirect } from "next/navigation"
 
-import { TaskList } from "../components/TaskList"
-
-export default function SyntheticV0PageForDeployment() {
-  return <TaskList />
+export default function Home() {
+  redirect("/dashboard")
 }
+

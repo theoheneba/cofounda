@@ -7,21 +7,21 @@ export function ResourceLibrary() {
   const resources = [
     {
       id: 1,
-      title: 'Startup Financial Planning Guide',
+      title: 'Cofounder Agreement Templates',
       type: 'document',
-      category: 'Finance',
+      category: 'Legal',
     },
     {
       id: 2,
-      title: 'Product Development Best Practices',
+      title: 'How to Find the Right Cofounder',
       type: 'video',
-      category: 'Development',
+      category: 'Partnerships',
     },
     {
       id: 3,
-      title: 'Marketing Strategy Handbook',
+      title: 'Startup Equity Split Guide',
       type: 'book',
-      category: 'Marketing',
+      category: 'Finance',
     },
   ]
 
