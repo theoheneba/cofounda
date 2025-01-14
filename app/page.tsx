@@ -1,128 +1,121 @@
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
-import { RocketIcon, ShieldCheckIcon, MessageSquareIcon, FileIcon } from 'lucide-react'
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
+import { RocketIcon, ShieldCheckIcon, MessageSquareIcon, FileIcon, Users, Lightbulb, TrendingUp } from 'lucide-react'
+import { FeaturedStartups } from "@/components/FeaturedStartups"
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel"
+import { StatsCounter } from "@/components/StatsCounter"
 
 export default function Home() {
   return (
-    <>
-      <section className="pt-32 pb-16 bg-[#FDF8F7]">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 text-[#4A3333]">
-            Find Your Perfect{" "}
-            <span className="text-[#E27D60]">Co-Founder</span>
-          </h1>
-          <p className="text-lg mb-8 text-[#6B5151] max-w-2xl mx-auto">
-            Connect with passionate entrepreneurs and professionals who share
-            your vision and complement your skills. Build something amazing
-            together.
-          </p>
-          <div className="flex justify-center gap-4">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">
+        <section className="pt-32 pb-16 bg-[#FDF8F7]">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-5xl font-bold mb-6 text-[#4A3333]">
+              Find Your Perfect{" "}
+              <span className="text-[#E27D60]">Co-Founder</span>
+            </h1>
+            <p className="text-lg mb-8 text-[#6B5151] max-w-2xl mx-auto">
+              Connect with passionate entrepreneurs and professionals who share
+              your vision and complement your skills. Build something amazing
+              together.
+            </p>
+            <div className="flex justify-center gap-4">
+              <Button 
+                size="lg" 
+                className="bg-[#E27D60] hover:bg-[#c66a51]"
+              >
+                <RocketIcon className="mr-2 h-4 w-4" />
+                Get Started
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-[#E27D60] text-[#E27D60] hover:bg-[#E27D60] hover:text-white"
+              >
+                Learn More
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#4A3333]">
+              Why Choose CoFounderHub?
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card>
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <Users className="h-12 w-12 text-[#E27D60] mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">Smart Matching</h3>
+                  <p className="text-[#6B5151]">Our AI-powered algorithm finds the perfect co-founder based on skills, experience, and goals.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <Lightbulb className="h-12 w-12 text-[#E27D60] mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">Idea Validation</h3>
+                  <p className="text-[#6B5151]">Get feedback on your startup ideas from experienced entrepreneurs and mentors.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <TrendingUp className="h-12 w-12 text-[#E27D60] mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">Growth Resources</h3>
+                  <p className="text-[#6B5151]">Access a wealth of resources, workshops, and tools to help your startup succeed.</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-[#FDF8F7]">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#4A3333]">
+              Featured Startups
+            </h2>
+            <FeaturedStartups />
+          </div>
+        </section>
+
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#4A3333]">
+              Success Stories
+            </h2>
+            <TestimonialsCarousel />
+          </div>
+        </section>
+
+        <section className="py-20 bg-[#E27D60] text-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              CoFounderHub in Numbers
+            </h2>
+            <StatsCounter />
+          </div>
+        </section>
+
+        <section className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-6 text-[#4A3333]">
+              Ready to Find Your Co-Founder?
+            </h2>
+            <p className="text-lg mb-8 text-[#6B5151] max-w-2xl mx-auto">
+              Join thousands of entrepreneurs who have found their perfect match on CoFounderHub.
+            </p>
             <Button 
               size="lg" 
               className="bg-[#E27D60] hover:bg-[#c66a51]"
             >
-              <RocketIcon className="mr-2 h-4 w-4" />
-              Get Started
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-[#E27D60] text-[#E27D60] hover:bg-[#E27D60] hover:text-white"
-            >
-              Learn More
+              Create Your Profile
             </Button>
           </div>
-        </div>
-      </section>
-
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 text-[#4A3333]">
-              Everything You Need to Find the Right Co-Founder
-            </h2>
-            <p className="text-lg text-[#6B5151] max-w-2xl mx-auto">
-              Our platform provides all the tools and features necessary to connect with
-              potential co-founders and bring your ideas to life.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-[#4A3333]">
-                Secure Communication Platform
-              </h3>
-              <p className="text-[#6B5151]">
-                Our built-in messaging system ensures your conversations remain
-                private and secure. Discuss your ideas, share your vision, and plan your
-                next steps with potential co-founders in a safe environment.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <ShieldCheckIcon className="h-5 w-5 text-[#E27D60] mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-[#4A3333]">End-to-End Security</h4>
-                    <p className="text-sm text-[#6B5151]">
-                      Your conversations are protected with enterprise-grade security.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <MessageSquareIcon className="h-5 w-5 text-[#E27D60] mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-[#4A3333]">Real-Time Chat</h4>
-                    <p className="text-sm text-[#6B5151]">
-                      Instant messaging with typing indicators.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <FileIcon className="h-5 w-5 text-[#E27D60] mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-[#4A3333]">File Sharing</h4>
-                    <p className="text-sm text-[#6B5151]">
-                      Share documents and files securely.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <Card className="p-4 bg-[#FDF8F7] border-none shadow-lg">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 p-3 bg-white rounded-lg">
-                  <div className="w-10 h-10 rounded-full bg-gray-200" />
-                  <div className="flex-1">
-                    <p className="text-sm text-[#4A3333]">
-                      Hi! I saw your EdTech project. I have ML/AI experience and would love to
-                      discuss collaboration!
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-[#E27D60] text-white rounded-lg ml-12">
-                  <div className="flex-1">
-                    <p className="text-sm">
-                      Perfect! When would you be free to discuss the project?
-                    </p>
-                  </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-200" />
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-white rounded-lg">
-                  <div className="w-10 h-10 rounded-full bg-gray-200" />
-                  <div className="flex-1">
-                    <div className="flex space-x-1">
-                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-    </>
+        </section>
+      </main>
+    </div>
   )
 }
 
