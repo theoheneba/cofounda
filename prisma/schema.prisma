@@ -1,0 +1,205 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String                   @id @default(cuid())
+  name                String?
+  email               String?                  @unique
+  emailVerified       DateTime?
+  image               String?
+  password            String?
+  bio                 String?
+  experience          String?
+  location            String?
+  linkedinUrl         String?
+  githubUrl           String?
+  profileCompleted    Boolean                  @default(false)
+  role                Role                     @default(USER)
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+  accounts            Account[]
+  sessions            Session[]
+  sentMessages        Message[]                @relation("SentMessages")
+  receivedMessages    Message[]                @relation("ReceivedMessages")
+  projects            Project[]
+  sentMatches         Match[]                  @relation("UserOne")
+  receivedMatches     Match[]                  @relation("UserTwo")
+  notifications       Notification[]
+  settings            UserSettings?
+  mentorRelationships MentorshipRelationship[] @relation("MentorRelationships")
+  menteeRelationships MentorshipRelationship[] @relation("MenteeRelationships")
+  subscription        Subscription?
+  referralCode        String?                  @unique
+  referredBy          String?
+  referredUsers       User[]                   @relation("Referrals")
+  referrer            User?                    @relation("Referrals", fields: [referredBy], references: [referralCode])
+  skills              Skill[]
+  interests           Interest[]
+  transactions        Transaction[]
+}
+
+model Skill {
+  id     String @id @default(cuid())
+  name   String
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Interest {
+  id     String @id @default(cuid())
+  name   String
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  senderId   String
+  receiverId String
+  createdAt  DateTime @default(now())
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model Project {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  userId      String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  user        User           @relation(fields: [userId], references: [id])
+  skills      ProjectSkill[]
+}
+
+model ProjectSkill {
+  id        String  @id @default(cuid())
+  name      String
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+}
+
+model Match {
+  id        String   @id @default(cuid())
+  userOneId String
+  userTwoId String
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userOne   User     @relation("UserOne", fields: [userOneId], references: [id])
+  userTwo   User     @relation("UserTwo", fields: [userTwoId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  content   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model UserSettings {
+  id                 String  @id @default(cuid())
+  userId             String  @unique
+  emailNotifications Boolean @default(true)
+  profileVisibility  String  @default("PUBLIC")
+  user               User    @relation(fields: [userId], references: [id])
+}
+
+model MentorshipRelationship {
+  id        String   @id @default(cuid())
+  mentorId  String
+  menteeId  String
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  mentor    User     @relation("MentorRelationships", fields: [mentorId], references: [id])
+  mentee    User     @relation("MenteeRelationships", fields: [menteeId], references: [id])
+}
+
+model Subscription {
+  id                 String             @id @default(cuid())
+  userId             String             @unique
+  user               User               @relation(fields: [userId], references: [id])
+  plan               Plan
+  status             SubscriptionStatus
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  cancelAtPeriodEnd  Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+model Transaction {
+  id                String            @id @default(cuid())
+  userId            String
+  user              User              @relation(fields: [userId], references: [id])
+  amount            Float
+  currency          String
+  status            TransactionStatus
+  paystackReference String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Plan {
+  FREE
+  GOLD
+  PREMIUM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESSFUL
+  FAILED
+}
