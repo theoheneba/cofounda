@@ -1,4 +1,4 @@
-import { db } from "./lib/db";// Adjust the import path as necessary
+const { db } = require("./lib/db"); // Adjust the import path as necessary
 
 async function testDatabase() {
     try {
