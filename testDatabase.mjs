@@ -1,4 +1,4 @@
-const { db } = require("./lib/db"); // Adjust the import path as necessary
+import { db } from "./lib/db.js"; // Use .js extension for ES modules
 
 async function testDatabase() {
     try {
