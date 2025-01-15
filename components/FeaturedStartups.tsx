@@ -16,7 +16,7 @@ const startups = [
     name: "HealthAI",
     description: "AI-powered health diagnostics and personalized treatment plans.",
     founders: [
-      { name: "Dr. Emily Chen", avatar: "/placeholder.svg?height=32&width=32" },
+      { name: "Dr. Emily Cheng", avatar: "/placeholder.svg?height=32&width=32" },
       { name: "Michael Wong", avatar: "/placeholder.svg?height=32&width=32" },
     ],
     tags: ["HealthTech", "AI"],
