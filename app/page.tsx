@@ -17,7 +17,7 @@ export default async function Home() {
   return (
       <div className="container mx-auto px-4 py-8">
         <section className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Find Your Perfect Co-Founder with Cofoundar</h1>
+          <h1 className="text-4xl font-bold mb-4">Find Your Perfect Co-Founder with Cofoundar!</h1>
           <p className="text-xl text-muted-foreground mb-6">Connect with passionate entrepreneurs and bring your startup vision to life</p>
           <Link href="/signup">
             <Button size="lg">Start Your Co-Founder Journey</Button>
