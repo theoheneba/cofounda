@@ -17,7 +17,7 @@ const startups = [
     description: "AI-powered health diagnostics and personalized treatment plans.",
     founders: [
       { name: "Dr. Emily Cheng", avatar: "/placeholder.svg?height=32&width=32" },
-      { name: "Michael Won", avatar: "/placeholder.svg?height=32&width=32" },
+      { name: "Michael Wong", avatar: "/placeholder.svg?height=32&width=32" },
     ],
     tags: ["HealthTech", "AI"],
   },
