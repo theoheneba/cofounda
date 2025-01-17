@@ -6,8 +6,9 @@ import { MainNav } from "@/components/main-nav"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Co-Founder Hub - Find Your Perfect Co-Founder",
-  description: "Connect with passionate entrepreneurs and professionals who share your vision and complement your skills.",
+  title: "Cofoundar - Find Your Perfect Co-Founder Match",
+  description: "Connect with passionate entrepreneurs and skilled professionals. Cofoundar helps you find the ideal co-founder to bring your startup vision to life.",
+  keywords: "co-founder, startup, entrepreneur, networking, business partnership, tech startup, innovation",
 }
 
 export default function RootLayout({

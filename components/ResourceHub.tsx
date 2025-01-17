@@ -1,56 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { FileIcon, VideoIcon, BookIcon } from 'lucide-react'
+import Link from "next/link"
 
-type Resource = {
-  id: string
-  title: string
-  description: string
-  type: 'article' | 'video' | 'ebook'
-  category: string
-  url: string
-}
+const resources = [
+  { id: 1, title: "How to Create a Winning Pitch Deck", category: "Pitching" },
+  { id: 2, title: "Understanding Startup Funding Rounds", category: "Funding" },
+  { id: 3, title: "Building a Minimum Viable Product", category: "Product Development" },
+]
 
-type ResourceHubProps = {
-  resources: Resource[]
-}
-
-export function ResourceHub({ resources }: ResourceHubProps) {
-  const getIcon = (type: Resource['type']) => {
-    switch (type) {
-      case 'article':
-        return <FileIcon className="h-6 w-6" />
-      case 'video':
-        return <VideoIcon className="h-6 w-6" />
-      case 'ebook':
-        return <BookIcon className="h-6 w-6" />
-    }
-  }
-
+export function ResourceHub() {
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {resources.map((resource) => (
-        <Card key={resource.id}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              {getIcon(resource.type)}
-              {resource.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground mb-4">{resource.description}</p>
-            <div className="flex items-center justify-between mb-4">
-              <Badge>{resource.category}</Badge>
-              <Badge variant="outline">{resource.type}</Badge>
-            </div>
-            <Button className="w-full" asChild>
-              <a href={resource.url} target="_blank" rel="noopener noreferrer">Access Resource</a>
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+    <Card className="mb-12">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">Resource Hub</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="space-y-2 mb-4">
+          {resources.map((resource) => (
+            <li key={resource.id} className="flex justify-between items-center">
+              <span>{resource.title}</span>
+              <span className="text-sm text-muted-foreground">{resource.category}</span>
+            </li>
+          ))}
+        </ul>
+        <Link href="/resources">
+          <Button>Explore All Resources</Button>
+        </Link>
+      </CardContent>
+    </Card>
   )
 }
 

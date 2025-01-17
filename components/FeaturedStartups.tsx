@@ -1,65 +1,52 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 
-const startups = [
-  {
-    name: "EcoTech Solutions",
-    description: "Developing sustainable energy solutions for urban environments.",
-    founders: [
-      { name: "Alex Johnson", avatar: "/placeholder.svg?height=32&width=32" },
-      { name: "Sarah Lee", avatar: "/placeholder.svg?height=32&width=32" },
-    ],
-    tags: ["CleanTech", "Sustainability"],
-  },
-  {
-    name: "HealthAI",
-    description: "AI-powered health diagnostics and personalized treatment plans.",
-    founders: [
-      { name: "Dr. Emily Cheng", avatar: "/placeholder.svg?height=32&width=32" },
-      { name: "Michael Wong", avatar: "/placeholder.svg?height=32&width=32" },
-    ],
-    tags: ["HealthTech", "AI"],
-  },
-  {
-    name: "FinLit",
-    description: "Making financial literacy accessible through gamified learning.",
-    founders: [
-      { name: "Jessica Taylor", avatar: "/placeholder.svg?height=32&width=32" },
-      { name: "David Rodriguez", avatar: "/placeholder.svg?height=32&width=32" },
-    ],
-    tags: ["FinTech", "EdTech"],
-  },
-]
+interface Startup {
+  id: string;
+  name: string;
+  description: string;
+  founderName: string;
+  founderAvatar: string;
+  tags: string[];
+}
 
-export function FeaturedStartups() {
+interface FeaturedStartupsProps {
+  startups: Startup[];
+}
+
+export function FeaturedStartups({ startups }: FeaturedStartupsProps) {
   return (
-    <div className="grid md:grid-cols-3 gap-8">
-      {startups.map((startup) => (
-        <Card key={startup.name}>
-          <CardContent className="p-6">
-            <h3 className="text-xl font-semibold mb-2">{startup.name}</h3>
-            <p className="text-[#6B5151] mb-4">{startup.description}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {startup.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">{tag}</Badge>
-              ))}
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-[#6B5151]">Co-founders:</span>
-              <div className="flex -space-x-2">
-                {startup.founders.map((founder) => (
-                  <Avatar key={founder.name} className="h-8 w-8 border-2 border-white">
-                    <AvatarImage src={founder.avatar} alt={founder.name} />
-                    <AvatarFallback>{founder.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                  </Avatar>
+    <section className="mb-12">
+      <h2 className="text-3xl font-semibold mb-6">Featured Startups</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {startups.map((startup) => (
+          <Card key={startup.id}>
+            <CardHeader>
+              <CardTitle>{startup.name}</CardTitle>
+              <CardDescription>{startup.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center space-x-4 mb-4">
+                <Avatar>
+                  <AvatarImage src={startup.founderAvatar} alt={startup.founderName} />
+                  <AvatarFallback>{startup.founderName[0]}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium">{startup.founderName}</p>
+                  <p className="text-sm text-muted-foreground">Founder</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {startup.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary">{tag}</Badge>
                 ))}
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </section>
   )
 }
 
