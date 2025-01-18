@@ -50,7 +50,7 @@ export default async function Home() {
           </div>
           <div className="text-center">
             <h3 className="text-xl font-medium mb-2">2. Explore Matches</h3>
-            <p>Browse through curated co-founder matches based on complementary skills and shared interests.</p>
+            <p>Browse through our curated co-founder matches based on complementary skills and shared interests.</p>
           </div>
           <div className="text-center">
             <h3 className="text-xl font-medium mb-2">3. Connect and Collaborate</h3>
