@@ -35,7 +35,7 @@ export default async function Home() {
         <h1 className="text-4xl font-bold mb-4">Find Your Perfect Co-Founder with Cofoundar</h1>
         <p className="text-xl text-muted-foreground mb-6">Connect with passionate entrepreneurs and bring your startup vision to life</p>
         <Link href="/signup">
-          <Button size="lg">Start Your Co-Founder Journey Now</Button>
+          <Button size="lg">Start Your Co-Founder Journey </Button>
         </Link>
       </section>
 
