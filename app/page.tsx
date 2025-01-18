@@ -54,7 +54,7 @@ export default async function Home() {
           </div>
           <div className="text-center">
             <h3 className="text-xl font-medium mb-2">3. Connect and Collaborate</h3>
-            <p>Engage with potential co-founders, discuss ideas, and start building your dream startup together now!.</p>
+            <p>Engage with potential co-founders, discuss ideas, and start building your dream startup together now.</p>
           </div>
         </div>
       </section>
